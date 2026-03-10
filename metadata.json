@@ -1,0 +1,5 @@
+{
+  "name": "GlassTodo",
+  "description": "A modern, glassmorphism-inspired todo application with user-specific task management.",
+  "requestFramePermissions": []
+}
