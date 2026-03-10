@@ -7,9 +7,10 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Note: SQLite will NOT persist on Vercel. 
-// Use a cloud database (Supabase, Neon, MongoDB) for production.
-const db = new Database("todos.db");
+// Use in-memory database on Vercel to avoid read-only filesystem errors.
+// Note: Data will NOT persist between function cold starts on Vercel.
+const dbPath = process.env.VERCEL ? ":memory:" : path.join(process.cwd(), "todos.db");
+const db = new Database(dbPath);
 
 // Initialize database
 db.exec(`
